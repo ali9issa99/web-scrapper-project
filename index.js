@@ -13,15 +13,16 @@ async function performScraping() {
 }
 
 const $ = cheerio.load(axiosResponse.data);
-const htmlElement = $(".elementClass");
+const jobs=[]
 
-    const job_title = []
-    const company_name = []
-    const job_location = []
-    const job_description = []
-    const job_postdate= []
-    const skills_needed = []
-    const application_link = []
+    $('.base-card__full-link.absolute.top-0.right-0.bottom-0.left-0.p-0.z-[2]').each((index, element) => {
+            const jobTitle = $(element).find('.top-card-layout__title font-sans text-lg papabear:text-xl font-bold leading-open text-color-text mb-0 topcard__title').text().trim();
+            const companyName = $(element).find('.topcard__org-name-link topcard__flavor--black-link').text().trim();
+            const jobLocation = $(element).find('.topcard__flavor topcard__flavor--bullet').text().trim();
+            const jobDescription = $(element).find('.show-more-less-html__markup relative overflow-hidden').text().trim();
+            const jobPostDate = $(element).find('.posted-time-ago__text topcard__flavor--metadata').text().trim();
+            const skillsNeeded = $(element).find('.description__job-criteria-list').text().trim();
+            const applicationLink = $(element).attr('apply-button apply-button--default top-card-layout__cta mt-2 ml-1.5 h-auto babybear:flex-auto top-card-layout__cta--primary btn-md btn-primary');
 
 
 performScraping();

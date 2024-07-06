@@ -23,6 +23,22 @@ const jobs=[]
             const jobPostDate = $(element).find('.posted-time-ago__text topcard__flavor--metadata').text().trim();
             const skillsNeeded = $(element).find('.description__job-criteria-list').text().trim();
             const applicationLink = $(element).attr('apply-button apply-button--default top-card-layout__cta mt-2 ml-1.5 h-auto babybear:flex-auto top-card-layout__cta--primary btn-md btn-primary');
+            
+            jobs.push({
+                jobTitle,
+                companyName,
+                jobLocation,
+                jobDescription,
+                jobPostDate,
+                skillsNeeded,
+                applicationLink
+            });
+        });
+
+        const jobsJSON = JSON.stringify(jobs, null, 2);
+        fs.writeFileSync('mlops_jobs.json', jobsJSON);
+        console.log('Scraping completed and data saved to mlops_jobs.json');
+
 
 
 performScraping();
